@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <AppHeader />
+    <h2 class="title">Список моих задач</h2>
+    <div v-if="todoList.length" class="todos">
+      <Todo v-for="todo in todoList" :key="todo.created_at" :todo="todo" />
+    </div>
+    <div v-else class="empty">Список задач пуст</div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import AppHeader from "@/components/AppHeader";
 
 export default {
   name: "Home",
+
   components: {
-    HelloWorld,
+    AppHeader,
+    Todo: () => import("@/components/Todo.vue"),
+  },
+
+  computed: {
+    todoList() {
+      return this.$store.state.todoList;
+    },
   },
 };
 </script>

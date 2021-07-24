@@ -1,23 +1,32 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from "vue"; // Импортируется Vue
+import VueRouter from "vue-router"; // Импортируется Router
+import Home from "../views/Home.vue"; // Компонент-страница Home
+import AddTodo from "@/views/AddTodo";
+import TodoDetails from "@/views/TodoDetails";
 
-Vue.use(VueRouter);
+Vue.use(VueRouter); // Устанавливаем плагин VueRouter
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "HomePage",
     component: Home,
+    meta: {},
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/add",
+    name: "AddPage",
+    component: AddTodo,
+  },
+  {
+    path: "/todo/:id",
+    name: "TodoDetailsPage",
+    component: TodoDetails,
+  },
+  {
+    path: "*",
+    name: "404",
+    redirect: "/",
   },
 ];
 
